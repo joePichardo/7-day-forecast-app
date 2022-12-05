@@ -33,22 +33,47 @@ app.get('/weather', async (req, res) => {
 		res.send({ error: "Enter country value." });
 	}
 
-	console.log("city", city);
-	console.log("state", state);
-	console.log("country", country);
-
 	try {
-		const weatherData = await fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${city},${state},${country}&appid=${process.env.API_KEY}`)
-		.then(response => {
-			console.log(response);
-			return response.json();
-		})
-		.then(json => {
-			console.log(json);
-			return json;
-		});
+		const locationData = await fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${city},${state},${country}&appid=${process.env.API_KEY}`)
+			.then(response => {
+				console.log(response);
+				return response.json();
+			})
+			.then(json => {
+				console.log(json);
+				return json;
+			});
 
-		res.send({ weatherData });
+		const { lat, lon } = locationData[0];
+
+		if (!lat || !lon) {
+			res.send({ error: "Location not found" });
+		}
+	
+
+		const weatherData = await fetch(`http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=imperial&appid=${process.env.API_KEY}`)
+			.then(response => {
+				console.log(response);
+				return response.json();
+			})
+			.then(json => {
+				console.log(json);
+				return json;
+			});
+
+		const forecast = {}
+		
+		weatherData.list.forEach(weather => {
+			const date = new Date(weather.dt_txt).toLocaleDateString('en-US');
+			const data = weather.main;
+			data.weather = weather.weather[0];
+			data.wind = weather.wind;
+			forecast[date] = data;
+		})
+
+		console.log(forecast);
+
+		res.send({ forecast });
 	} catch (error) {
 		res.send({ error: error.message });
 	}
