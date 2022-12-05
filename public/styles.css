@@ -1,0 +1,107 @@
+body {
+    font-family: 'Source Sans Pro', sans-serif;
+    margin: 30px 15px;
+}
+
+/* Loading icon */
+.loader {
+    border: 5px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 5px solid #eb6e4b;
+    width: 30px;
+    height: 30px;
+    -webkit-animation: spin 2s linear infinite; /* Safari */
+    animation: spin 2s linear infinite;
+}
+
+/* Safari support */
+@-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+#error-message {
+    border-radius: 15px;
+    width: 100%;
+    padding: 15px 10px;
+    color: #ffffff;
+}
+
+#searchTextField {
+    margin-bottom: 30px;
+    max-width: 500px;
+    width: 100%;
+    height: 30px;
+    font-size: 20px;
+    padding-left: 15px;
+    display: none;
+}
+
+#searchTextField.pac-target-input {
+    display: block;
+}
+
+#searchTextField.pac-target-input + .loader {
+    display: none;
+}
+
+#forecast-location {
+
+}
+
+#forecast {
+    display: flex;
+    margin-left: -15px;
+    margin-right: -15px;
+    flex-wrap: wrap;
+}
+
+.forecast {
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.forecast__wrapper {
+    text-align: center;
+    margin-bottom: 80px;
+    width: 100%;
+}
+
+@media (min-width: 500px) {
+    .forecast__wrapper {
+        width: 50%;
+    }
+}
+
+@media (min-width: 768px) {
+    .forecast__wrapper {
+        width: 33.33333%;
+    }
+}
+
+@media (min-width: 992px) {
+    .forecast__wrapper {
+        width: 25%;
+    }
+
+    .forecast {
+        max-width: 1200px;
+    }
+}
+
+.forecast__wrapper--padding {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.forecast__weekday {
+    margin-bottom: 0;
+}
