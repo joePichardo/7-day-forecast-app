@@ -6,20 +6,11 @@
     <title>7 day Weather Forecast</title>
   </head>
   <body>
-    <form id="location-form">
-        City Name: <input id="input-city" type="text" value="Phoenix">
-        State Code: <input id="input-state" type="text" value="AZ">
-        Country Code: <input id="input-country" type="text" value="US">
-        <input type="submit">
-      </form>
-      <ul>
-          <li>Day of the week</li>
-          <li>Date</li>
-          <li>Temperature</li>
-          <li>Weather State (sunny, cloudly, rainy, snowy, etc)</li>
-          <li>Weather Icons (matching weather state)</li>
-          <li>Wind speed & direction</li>
-      </ul>
-      <script src="./weather.js"></script>
+    <div id="error-message"></div>
+    <input id="searchTextField" type="text" size="50">
+
+    <div id="forecast"></div>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDzTdhJh_gjIDpOyFEKM0T6zZy1oPirQdg&libraries=places"></script>
+    <script src="./weather.js"></script>
   </body>
 </html>
