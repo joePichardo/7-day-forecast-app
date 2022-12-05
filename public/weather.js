@@ -4,8 +4,6 @@ function googlePlacesInitialize() {
 	const autocomplete = new google.maps.places.Autocomplete(input);
 		google.maps.event.addListener(autocomplete, 'place_changed', function () {
 			var place = autocomplete.getPlace();
-			console.log(place);
-			console.log(place.name);
 			document.getElementById('forecast').innerHTML = `<div class="loader"></div>`;
 			if (place.formatted_address) {
 				document.getElementById('forecast-location').innerHTML = `<h1>${place.formatted_address} - Forecast</h1>`;
@@ -13,8 +11,6 @@ function googlePlacesInitialize() {
 				document.getElementById('forecast-location').innerHTML = "";
 			}
 			if (place.geometry && place.geometry.location) {
-				console.log(place.geometry.location.lng());
-				console.log(place.geometry.location.lat());
 				getForecastData(place.geometry.location.lat(), place.geometry.location.lng());
 			}				
 		});
@@ -57,14 +53,7 @@ async function getForecastData(lat, lng) {
 			</div>
 		</div>
 		`
-
 		htmlForecast += html;
-		
-		console.log(weekday[date.getDay()]);
-		console.log(date.toLocaleDateString('en-US'));
-		console.log(temperature);
-		console.log(weather);
-		console.log(wind);
 	})
 
 	if (htmlForecast) {

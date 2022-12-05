@@ -21,23 +21,14 @@ router.get('/', async (req,res) => {
 app.get('/weather', async (req, res) => {
 	const { lat, lng } = req.query;
 
-	console.log("lat", lat);
-	console.log("lng", lng);
-
 	if (!lat || !lng) {
 		return res.send({ error: "Location data was not received." });
 	}
 
 	try {
 		const weatherData = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lng}&units=imperial&appid=${process.env.API_KEY}`)
-			.then(response => {
-				console.log(response);
-				return response.json();
-			})
-			.then(json => {
-				console.log(json);
-				return json;
-			});
+			.then(response => response.json())
+			.then(json => json);
 
 		const forecast = {}
 		
@@ -48,8 +39,6 @@ app.get('/weather', async (req, res) => {
 			data.wind = weather.wind;
 			forecast[date] = data;
 		})
-
-		console.log(forecast);
 
 		res.send({ forecast });
 	} catch (error) {
