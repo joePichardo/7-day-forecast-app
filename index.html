@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>7 day Weather Forecast</title>
+  </head>
+  <body>
+    <form id="location-form" onsubmit="event.preventDefault();getData();">
+        City Name: <input type="text" value="Phoenix">
+        State Code: <input type="text" value="AZ">
+        Country Code: <input type="text" value="US">
+        <input type="submit">
+      </form>
+      <ul>
+          <li>Day of the week</li>
+          <li>Date</li>
+          <li>Temperature</li>
+          <li>Weather State (sunny, cloudly, rainy, snowy, etc)</li>
+          <li>Weather Icons (matching weather state)</li>
+          <li>Wind speed & direction</li>
+      </ul>
+      <script src="./weather.js"></script>
+  </body>
+</html>
