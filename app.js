@@ -19,39 +19,17 @@ router.get('/', async (req,res) => {
 });
 
 app.get('/weather', async (req, res) => {
-	const { city, state, country } = req.query;
+	const { lat, lng } = req.query;
 
-	if (!city) {
-		res.send({ error: "Enter city value." });
-	}
+	console.log("lat", lat);
+	console.log("lng", lng);
 
-	if (!state) {
-		res.send({ error: "Enter state value." });
-	}
-
-	if (!country) {
-		res.send({ error: "Enter country value." });
+	if (!lat || !lng) {
+		return res.send({ error: "Location data was not received." });
 	}
 
 	try {
-		const locationData = await fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${city},${state},${country}&appid=${process.env.API_KEY}`)
-			.then(response => {
-				console.log(response);
-				return response.json();
-			})
-			.then(json => {
-				console.log(json);
-				return json;
-			});
-
-		const { lat, lon } = locationData[0];
-
-		if (!lat || !lon) {
-			res.send({ error: "Location not found" });
-		}
-	
-
-		const weatherData = await fetch(`http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=imperial&appid=${process.env.API_KEY}`)
+		const weatherData = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lng}&units=imperial&appid=${process.env.API_KEY}`)
 			.then(response => {
 				console.log(response);
 				return response.json();
