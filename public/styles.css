@@ -78,6 +78,10 @@ body {
     width: 100%;
 }
 
+.forecast__wrapper p {
+    margin: 0;
+}
+
 @media (min-width: 500px) {
     .forecast__wrapper {
         width: 50%;
@@ -107,4 +111,10 @@ body {
 
 .forecast__weekday {
     margin-bottom: 0;
+}
+
+label[for="searchTextField"] {
+    font-size: 20px;
+    display: block;
+    margin-bottom: 5px;
 }

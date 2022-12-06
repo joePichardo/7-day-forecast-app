@@ -3,7 +3,9 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>7 day Weather Forecast</title>
+    <title>7 Day Weather Forecast App</title>
+    <meta name="description" content="Use this app to get a 7 day weather forecast for any entered location.">
+    <meta name="og:title" property="og:title" content="7 Day Weather Forecast App">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,16 +13,19 @@
     <link href="./styles.css" rel="stylesheet">
   </head>
   <body>
-    <div class="forecast">
+    <div class="forecast" role="main">
       <div>
         <div id="error-message"></div>
       </div>
+      <label for="searchTextField" class="visually">Enter Location to get a Forecast</label>
       <input id="searchTextField" type="text">
-      <div class="loader"></div>
+      <div class="loader" role="alert" aria-busy="true"></div>
       <div id="forecast-location">
         <h1>Glendale, AZ, USA - Forecast</h1>
       </div>
-      <div id="forecast"></div>
+      <div id="forecast">
+        <div class="loader" role="alert" aria-busy="true"></div>
+      </div>
     </div>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDzTdhJh_gjIDpOyFEKM0T6zZy1oPirQdg&libraries=places"></script>
     <script src="./weather.js"></script>
