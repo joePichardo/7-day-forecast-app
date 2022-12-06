@@ -26,23 +26,34 @@ app.get('/weather', async (req, res) => {
 	}
 
 	try {
-		const weatherData = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lng}&units=imperial&appid=${process.env.API_KEY}`)
+		const weatherData = await fetch(`https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lng}&units=imperial&exclude=minutely,hourly,alerts&appid=${process.env.API_KEY}`)
 			.then(response => response.json())
 			.then(json => json);
 
+		if (!weatherData || !weatherData.current || !weatherData.daily) {
+			return res.send({ error: "Data not found." });
+		}
+
 		const forecast = {}
-		
-		weatherData.list.forEach(weather => {
-			const date = new Date(weather.dt_txt).toLocaleDateString('en-US');
-			const data = weather.main;
+
+		function addForecast(weather) {
+			const date = new Date(weather.dt * 1000).toLocaleDateString('en-US');
+			const data = weather;
 			data.weather = weather.weather[0];
-			data.wind = weather.wind;
+			data.wind_deg = weather.wind_deg;
+			data.wind_speed = weather.wind_speed;
 			forecast[date] = data;
+		}
+
+		addForecast(weatherData.current);
+
+		weatherData.daily.forEach(weather => {
+			addForecast(weather);
 		})
 
-		res.send({ forecast });
+		return res.send({ forecast });
 	} catch (error) {
-		res.send({ error: error.message });
+		return res.send({ error: error.message });
 	}
 })
 
