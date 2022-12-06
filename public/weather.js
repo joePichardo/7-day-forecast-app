@@ -1,9 +1,11 @@
 
+// Add Google Places API
 function googlePlacesInitialize() {
 	const input = document.getElementById('searchTextField');
 	const autocomplete = new google.maps.places.Autocomplete(input);
 		google.maps.event.addListener(autocomplete, 'place_changed', function () {
 			var place = autocomplete.getPlace();
+			// Loading state started
 			document.getElementById('forecast').innerHTML = `<div class="loader" role="alert" aria-busy="true"></div>`;
 			if (place.formatted_address) {
 				document.getElementById('forecast-location').innerHTML = `<h1>${place.formatted_address} - Forecast</h1>`;
@@ -16,11 +18,13 @@ function googlePlacesInitialize() {
 		});
 }
 
+// Fetch Forecast Data
 async function getForecastData(lat, lng) {
 	const { forecast, error } = await fetch(`/weather?lat=${lat}&lng=${lng}`)
 		.then(response => response.json())
 		.then(json => json);
 
+	// Error handling
 	const errorMessage = document.getElementById('error-message');
 	if (error) {
 		errorMessage.innerHTML = `<div class="error-message">${error}</div>`;
@@ -29,6 +33,7 @@ async function getForecastData(lat, lng) {
 		errorMessage.innerHTML = "";
 	}
 
+	// Build html for forecast from data
 	let htmlForecast = "";
 	Object.entries(forecast).forEach(([key, value]) => {
 		const date = new Date(key);
@@ -61,6 +66,8 @@ async function getForecastData(lat, lng) {
 	}
 }
 
+// Initial fetch for forecast data
 getForecastData(33.5386523, -112.1859866);
 
+// Initialize Google Places when window is ready
 window.addEventListener('load', googlePlacesInitialize);

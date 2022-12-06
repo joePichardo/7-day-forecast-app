@@ -25,6 +25,7 @@ body {
     100% { transform: rotate(360deg); }
 }
 
+/* Error Message Banner */
 .error-message {
     border-radius: 15px;
     width: auto;
@@ -35,6 +36,7 @@ body {
     display: inline-block;
 }
 
+/* Input for location */
 #searchTextField {
     margin-bottom: 30px;
     max-width: 500px;
@@ -53,10 +55,13 @@ body {
     display: none;
 }
 
-#forecast-location {
-
+label[for="searchTextField"] {
+    font-size: 20px;
+    display: block;
+    margin-bottom: 5px;
 }
 
+/* Forecast elements */
 #forecast {
     display: flex;
     margin-left: -15px;
@@ -111,10 +116,4 @@ body {
 
 .forecast__weekday {
     margin-bottom: 0;
-}
-
-label[for="searchTextField"] {
-    font-size: 20px;
-    display: block;
-    margin-bottom: 5px;
 }

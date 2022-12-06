@@ -36,7 +36,9 @@ app.get('/weather', async (req, res) => {
 
 		const forecast = {}
 
+		// Build data object to be used on the frontend
 		function addForecast(weather) {
+			// dt is times 1000 for unix timestamp
 			const date = new Date(weather.dt * 1000).toLocaleDateString('en-US');
 			const data = weather;
 			data.weather = weather.weather[0];
