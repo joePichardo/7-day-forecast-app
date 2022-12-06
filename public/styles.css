@@ -25,11 +25,14 @@ body {
     100% { transform: rotate(360deg); }
 }
 
-#error-message {
+.error-message {
     border-radius: 15px;
-    width: 100%;
+    width: auto;
     padding: 15px 10px;
     color: #ffffff;
+    background: #ef7a7a;
+    margin-bottom: 15px;
+    display: inline-block;
 }
 
 #searchTextField {

@@ -23,10 +23,10 @@ async function getForecastData(lat, lng) {
 
 	const errorMessage = document.getElementById('error-message');
 	if (error) {
-		errorMessage.innerText = error;
+		errorMessage.innerHTML = `<div class="error-message">${error}</div>`;
 		return;
 	} else {
-		errorMessage.innerText = "";
+		errorMessage.innerHTML = "";
 	}
 
 	let htmlForecast = "";
