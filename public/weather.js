@@ -32,7 +32,7 @@ async function getForecastData(lat, lng) {
 	let htmlForecast = "";
 	Object.entries(forecast).forEach(([key, value]) => {
 		const date = new Date(key);
-		const { temp: temperature, weather, wind } = value;
+		const { temp: temperature, weather, wind_deg, wind_speed } = value;
 		const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
 
 		const html = `
@@ -40,15 +40,15 @@ async function getForecastData(lat, lng) {
 			<div class="forecast__wrapper--padding">
 				<h2 class="forecast__weekday">${weekday[date.getDay()]}</h2>
 				<div class="forecast__date">${date.toLocaleDateString('en-US')}</div>
-				<div class="forecast__temperature">${temperature}&#176;</div>
+				<div class="forecast__temperature">${temperature.day}&#176;</div>
 				<div class="forecast__weather">${weather.main}</div>
 				<div class="forecast__icon">
 					<img src="https://openweathermap.org/img/wn/${weather.icon}@4x.png" alt="Weather - ${weather.description}">
 				</div>
 				<div class="forecast__wind">
 					<div class="forecast__wind--title">Wind</div>
-					<div class="forecast__wind--speed">Speed: ${wind.speed} mph</div>
-					<div class="forecast__wind--direction">Direction: ${wind.deg} degrees</div>
+					<div class="forecast__wind--speed">Speed: ${wind_speed} mph</div>
+					<div class="forecast__wind--direction">Direction: ${wind_deg} degrees</div>
 				</div>
 			</div>
 		</div>
